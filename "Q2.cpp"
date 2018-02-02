@@ -1,0 +1,122 @@
+#include <iostream>
+using namespace std;
+//construction of node
+class node		
+{
+ public:
+ int data;
+ node *prev,*next;
+};
+//creating class stack
+class Stack
+{
+ private:
+ node *head,*tail;
+ public:
+ Stack()		
+ {
+  head=NULL;
+  tail=NULL;
+ }
+ //insertions of element
+ void push(int data)		
+ {
+  node *temp=new node;
+  temp->data=data;
+  temp->prev=NULL;
+  temp->next=NULL;
+  //if linked list is empty
+  if(head==NULL)		
+  {
+   head=temp;
+   tail=temp;
+  }
+  else
+  {
+   head->prev=temp;
+   temp->next=head;
+   head=temp;
+  }
+ }
+ int pop()		
+ {
+  int n=head->data;
+  head=head->next;
+  head->prev=NULL;
+  return n;
+ }
+ //display of element
+ void display1()	
+ {
+  node *temp=new node;
+  temp=head;
+  while(temp!=NULL) 
+  {
+   cout<<temp->data<<"\n";
+   temp=temp->next;
+  }
+ }
+ //displaying after converting into queue
+ void display2()	
+ {
+  node *temp=new node;
+  temp=head;
+  while(temp!=NULL)
+  {
+   cout<<temp->data<<"->";
+   temp=temp->next;
+  }
+ }
+ void display3()	
+ {
+  node *temp=new node;
+  temp=tail;
+  while(temp!=NULL)
+  {
+   if(temp==head)
+   cout<<temp->data<<"\n";
+   else
+   cout<<temp->data<<"->";
+   temp=temp->prev;
+  }
+ } 
+};
+int main()
+{
+ int data,n;
+ //objects creation and functions calling
+ Stack obj1,obj2;
+ cout<<"Enter the number of entries you want to make in the 1st stack\n";
+ cin>>n;
+ cout<<"For 1st stack\n";
+ for(int i=1;i<=n;i++)
+ {
+  cout<<"Enter data\n";
+  cin>>data;
+  obj1.push(data);
+ }
+ cout<<"The 1st stack is\n";
+ obj1.display1();
+ cout<<"Enter the number of entries you want to make in the 2nd stack\n";
+ cin>>n;
+ cout<<"For 2nd stack\n";
+ for(int i=1;i<=n;i++)
+ {
+  cout<<"Enter data\n";
+  cin>>data;
+  obj2.push(data);
+ }
+ cout<<"The 2nd stack is\n";
+ obj2.display1();
+ cout<<"Now implementing queue using two stacks\n";
+ cout<<"Enter the data you want to push\n";
+ cin>>data;
+ obj1.push(data);
+ cout<<"After implementing push\n";
+ obj1.display2();
+ obj2.display3();
+ cout<<"Popping out the last element\n"<<obj2.pop()<<"\n";
+ cout<<"After implementing pop\n";
+ obj1.display2();
+ obj2.display3();
+}
