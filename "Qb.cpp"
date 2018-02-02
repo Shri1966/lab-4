@@ -1,0 +1,109 @@
+#include <iostream>
+using namespace std;
+
+//consturction of node
+struct node
+{
+int data;
+node *next;
+};
+
+//creating class queue
+class queue{
+	node *rear,*front;
+	public:
+	queue()
+	{
+		rear=front=NULL;
+	}
+	
+	//insertion of element
+	void push()
+	{
+	int value;
+	node *temp=new node;
+	cout<<"\nPUSH Operationn\n";
+	cout<<"Enter a number to insert: ";
+            cin>>value;
+	temp->data=value;
+	temp->next=NULL;
+	//insertions of !st element
+    if(front==NULL){
+        front=temp;
+    }
+    else
+        rear->next=temp;
+        rear=temp;
+    
+    cout<<"\nNew item is inserted to the stack";
+	
+	}
+//Deletion of first element
+void pop()
+{
+   if(front==NULL)
+   {
+      cout<<"\nQueue is empty!!";
+      return;
+   }
+   node *temp=new node;
+   temp=front;
+   front=front->next;
+   cout<<"\nDeletion Operation........\nDeleted value is "<<temp->data;
+   delete temp;
+   
+}
+// display element of queue
+void display()
+{
+   node *temp=new node;
+   temp=front;
+   if(front==NULL)
+   {
+      cout<<"The Queue is empty!!";
+      return;
+   }
+   cout<<"\nThe Queue is\n";
+   while(temp!=NULL)
+   {
+      cout<<temp->data<<" ->";
+      temp=temp->next;
+   }
+   cout<<"NULL";
+}
+ 
+};
+
+// Main function
+int main()
+{
+    queue q;
+    int choice;
+    while(1)
+    {
+        cout<<"\n-----------------------------------------------------------";
+        cout<<"\n\t\tSTACK USING LINKED LIST\n\n";
+        cout<<"1:PUSH\n2:POP\n3:DISPLAY STACK\n4:EXIT";
+        cout<<"\nEnter your choice(1-4): ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:
+                q.push();
+                break;
+            case 2:
+                q.pop();
+                break;
+            case 3:
+                q.display();
+                break;
+            case 4:
+                return 0;
+                break;
+            default:
+                cout<<"\nPlease enter correct choice(1-4)!!";
+                break;
+        }
+    }
+    return 0;
+}
