@@ -1,0 +1,156 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+int top, front;
+class Issue
+{
+    public:
+    char name[30];
+    long int kk;
+    char desc[100];
+    Issue* link;
+    Issue(){link=NULL;};
+};
+
+class Stack
+{
+    public:
+    char nam[30];
+    // push a character into stack 
+    void push(char a)
+   {
+      top++;
+      nam[top]  =  a;
+   }
+//delete an element in stack 
+   void pop()
+   {
+      top--;
+   }
+}stack;
+
+class CustomerService
+{
+    public:
+    Issue* head;
+    Issue* tail;
+    CustomerService()
+    {
+        head=NULL;
+        tail=NULL;
+    }
+    int Palindrome(char nm[30]);
+    void addIssue(char nm[30], long int p, char desc[]);
+    void displayIssue();
+};
+
+//Checking Palindrome Using Array STACK
+int CustomerService::Palindrome(char nm[30])
+{
+   top=-1;
+   front=0;
+   char b;
+   for (int i = 0;nm[i] != '\0';i++)
+    {
+          b = nm[i];
+          stack.push(b);
+    }
+   for (int i = 0;i < (signed)(strlen(nm) / 2);i++)
+    
+{
+   top=-1;
+   front=0;
+   char b;
+          if (stack.nam[top] == stack.nam[front])
+          {
+                stack.pop();
+                front++;
+          }
+          else
+          {
+                return 0;
+          }
+    }
+    int x=front;
+    front  =  0;
+    top  =  -1;
+    if ((signed)(strlen(nm) / 2)==x)
+      {    return 1;}
+      return -1;
+}
+
+void CustomerService::addIssue (char nm[],long int p, char des[])
+{
+    Issue* temp=new Issue;
+    temp->kk=p;
+    strcpy(temp->name,nm);
+    strcpy(temp->desc,des);
+    if(head==NULL)
+    {      head=temp;
+      tail=temp;
+      return;
+      
+    }
+    if(Palindrome(nm)==1)
+    {
+        temp->link=head;
+        head=temp;
+        
+    }
+    else
+    {
+        tail->link=temp;
+        tail=temp;
+        
+    }
+};
+    
+    
+
+void CustomerService::displayIssue()
+{
+    Issue* iss;
+    iss=head;
+    if(iss==NULL)
+    {
+        cout<<"There is no registration done"<<endl;
+    }
+    else
+    {
+        cout<<"\nNAME \t \t PHONE \t \t\t Description \n";
+        while(iss!=NULL)
+        {
+            cout<<"\n"<<iss->name<<" \t \t "<<iss->kk<<" \t \t "<<iss->desc;
+            iss=iss->link;
+        }
+    }
+    cout<<"\n \n \n";
+}
+
+int main()
+{
+    CustomerService CS;
+    CS.displayIssue();
+    CS.addIssue("ISSUE",111111111,"Testing code");
+    CS.displayIssue();
+    CS.addIssue("ISSI",2222222222,"Code Testing");
+    CS.displayIssue();
+    CS.addIssue("ISS",3333333333,"PALINDROME STACK");
+    CS.displayIssue();
+    CS.addIssue("PRBLM",4444444444,"STACK PALINDROME");
+    CS.displayIssue();
+    CS.addIssue("PRORP",5555555555,"CODE SUCCESFUL");
+    CS.displayIssue();
+    CS.addIssue("PROB",6666666666,"SUCCESSFUL CODE");
+    CS.displayIssue();
+    CS.addIssue("TICKET",7777777777,"PDSL 2");
+    CS.displayIssue();
+    CS.addIssue("TICIT",8888888888,"2 PDSL");
+    CS.displayIssue();
+    CS.addIssue("TIIT",9999999999,"LAST ONE");
+    CS.displayIssue();
+    CS.addIssue("ENDNE",0000000000,"ONE LAST");
+    CS.displayIssue();
+    return 0;   
+}
